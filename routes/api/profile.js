@@ -124,7 +124,9 @@ router.post(
       profileFields.githubusername = req.body.githubusername;
     // Skills - split into array at the comma.  Note that skills is an array of strings in the ProfileSchema
     if (typeof req.body.skills !== "undefined") {
-      profileFields.skills = req.body.skills.split(",");
+      profileFields.skills = req.body.skills
+        .split(",")
+        .map(item => item.trim());
     }
 
     // Social - Need to initialize .social array before pushing to it or we'll get an error that profileFields.social{} does not exist

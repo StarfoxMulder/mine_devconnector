@@ -28,7 +28,7 @@ class NavBar extends Component {
               style={{
                 width: "40px",
                 marginRight: "5px",
-                borderRadius: "9px"
+                borderRadius: ".3rem"
               }}
               title="You must have a Gravatar connected to your email to display a picture of yourself"
             />Logout

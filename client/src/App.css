@@ -37,3 +37,10 @@ img {
 .form-control::placeholder {
   color: #bbb !important;
 }
+
+.social .input-group-text {
+  width: 45px;
+}
+.social .input-group-text svg {
+  margin: auto;
+}

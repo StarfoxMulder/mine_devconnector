@@ -15,11 +15,11 @@ class Experience extends Component {
         <td>{exp.company}</td>
         <td>{exp.title}</td>
         <td>
-          <Moment format="YYYY/MM/DD">{exp.from}</Moment> -
+          <Moment format="MM/DD/YY">{exp.from}</Moment> -&nbsp;&nbsp;
           {exp.to === null ? (
-            " Now"
+            "Now"
           ) : (
-            <Moment format="YYYY/MM/DD">{exp.to}</Moment>
+            <Moment format="MM/DD/YY">{exp.to}</Moment>
           )}
         </td>
         <td>

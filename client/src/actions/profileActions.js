@@ -8,7 +8,7 @@ import {
   CLEAR_CURRENT_PROFILE
 } from "./types";
 
-// Get curretn profile
+// Get current profile
 export const getCurrentProfile = () => dispatch => {
   // Loading is set to true at the begining of this function by invoking the profileReducer with case PROFILE_LOADING
   // Loading is set to false when either a profile or an error is returned and profileReducer is invoked again with case GET_PROFILE (the difference is in the payload, on if the profile data or an epty object is passed)
@@ -25,6 +25,25 @@ export const getCurrentProfile = () => dispatch => {
       dispatch({
         type: GET_PROFILE,
         payload: {}
+      })
+    );
+};
+
+// Get profile by handle
+export const getProfileByHandle = handle => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get(`/api/profile/handle/${handle}`)
+    .then(res =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: null
       })
     );
 };

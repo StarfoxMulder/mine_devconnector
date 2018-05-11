@@ -87,6 +87,10 @@ class PostItem extends Component {
                 <Link to={`/post/${post._id}`} className="btn btn-info mr-1">
                   Comments
                 </Link>
+                <span className="comCount badge">
+                  <i className="far fa-comment text-secondary" />
+                  <p>{post.comments.length}</p>
+                </span>
                 {post.user === auth.user.id ? (
                   <button
                     className="btn btn-danger mr-1"

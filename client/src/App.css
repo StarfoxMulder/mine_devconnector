@@ -44,3 +44,10 @@ img {
 .social .input-group-text svg {
   margin: auto;
 }
+
+.comCount .fa-comment {
+  font-size: 1.8em;
+}
+.comCount p {
+  margin-top: -17.5px;
+}

@@ -101,6 +101,17 @@ export const addEducation = (eduData, history) => dispatch => {
     );
 };
 
+// Add Avatar
+export const updateAvatar = () => dispatch => {
+  console.log("inside of updateAvatar");
+  axios.post("api/users/avatar").catch(err =>
+    dispatch({
+      type: GET_ERRORS,
+      payload: err.response.data
+    })
+  );
+};
+
 // Get all profiles
 export const getProfiles = () => dispatch => {
   dispatch(setProfileLoading());

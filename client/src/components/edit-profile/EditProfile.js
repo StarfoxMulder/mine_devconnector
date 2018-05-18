@@ -6,8 +6,13 @@ import TextFieldGroup from "../common/TextFieldGroup";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import InputGroup from "../common/InputGroup";
 import SelectListGroup from "../common/SelectListGroup";
-import { createProfile, getCurrentProfile } from "../../actions/profileActions";
+import {
+  createProfile,
+  getCurrentProfile,
+  updateAvatar
+} from "../../actions/profileActions";
 import isEmpty from "../../validation/is-empty";
+// TODO: Create and Import updateAvatar and deleteAvatar from profileActions
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -32,6 +37,7 @@ class CreateProfile extends Component {
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onSubAvatar = this.onSubAvatar.bind(this);
   }
 
   componentDidMount() {
@@ -123,6 +129,18 @@ class CreateProfile extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  onSubAvatar(e) {
+    e.preventDefault();
+
+    /*
+    const avatarFile = {
+      avatar: this.state.avatar
+    };
+*/
+
+    this.props.updateAvatar();
+  }
+
   render() {
     const { errors, displaySocialInputs } = this.state;
 
@@ -202,6 +220,50 @@ class CreateProfile extends Component {
               </Link>
               <h1 className="display-4 text-center">Edit Profile</h1>
               <small className="d-block pb-3">* = required fields</small>
+              {/* TODO
+                  <form action="/upload" method="POST" enctype="multipart/form-data">
+                    <div class="custom-file mb-3">
+                      <input type="file" name="file" id="file" class="custom-file-input">
+                      <label for="file" class="custom-file-label">Choose image file</label>
+                    </div>
+                    <input type="submit" value="Submit" class="btn btn-primary btn-block">
+                  </form>
+
+                * <form onSubmit={this.onSubAvatar} enctype="multipart/form-data">
+                *   <div className="custom-file mb-3">
+                      <input type="file" name="file" id="file" className="custom-file-input">
+                      <label for="file" className="custom-file-label">Choose image file</label>
+                    </div>
+                * <input
+                  type="submit"
+                  value="Submit"
+                  className="btn btn-info btn-block mt-4"
+                  />
+                * </form>
+              */}
+              <form
+                onSubmit={this.onSubAvatar}
+                encType="multipart/form-data"
+                className="mb-3"
+              >
+                <div className="custom-file">
+                  <input
+                    type="file"
+                    name="file"
+                    id="file"
+                    className="custom-file-input"
+                  />
+                  <label htmlFor="file" className="custom-file-label">
+                    Choose image file
+                  </label>
+                </div>
+                <input
+                  type="submit"
+                  value="Change Avatar"
+                  className="btn btn-info mx-auto my-3"
+                  style={{ width: 133, display: "block" }}
+                />
+              </form>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   placeholder="* Profile Handle"
@@ -302,6 +364,7 @@ class CreateProfile extends Component {
 CreateProfile.propTypes = {
   createProfile: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
+  updateAvatar: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
@@ -311,6 +374,8 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { createProfile, getCurrentProfile })(
-  withRouter(CreateProfile)
-);
+export default connect(mapStateToProps, {
+  createProfile,
+  getCurrentProfile,
+  updateAvatar
+})(withRouter(CreateProfile));

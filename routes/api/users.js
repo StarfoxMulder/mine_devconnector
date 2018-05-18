@@ -6,9 +6,18 @@ const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys.js");
 const passport = require("passport");
 
+///////    Packages for image uploading
+const db = require("../../config/keys.js").mongoURI;
+const crypto = require("crypto");
+const multer = require("multer");
+const GridFsStorage = require("multer-gridfs-storage");
+const Grid = require("gridfs-stream");
+const methodOverride = require("method-override");
+
 // Load Input Validation
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
+const validateAvatarInput = require("../../validation/avatar");
 
 // Load User model
 const User = require("../../models/User");
@@ -133,6 +142,38 @@ router.get(
       id: req.user.id,
       name: req.user.name,
       email: req.user.email
+    });
+  }
+);
+
+// @route   POST api/users/avatar
+// @desc    Update a user's avatar with a custom image
+// @access  Private
+
+router.post(
+  "/avatar",
+  passport.authenticate("jwt", { session: false }),
+  /*  upload.single("file"), */
+  (req, res) => {
+    console.log("making it into the post");
+    // Check to see if the file type being submitted is an image
+    /*
+    app.post("/upload", upload.single("file"), (req, res) => {
+      res.json({ file: req.file });
+    });
+*/
+    //  const avatarFile = req.body.avatar;
+
+    User.findOne({ user: req.user.id }).then(user => {
+      console.log(user.name);
+      upload(req, res, user => {
+        user.avatar = req.file.path;
+        user.save(function(err) {
+          if (err) {
+            throw err;
+          }
+        });
+      }).then(user => res.json(user));
     });
   }
 );

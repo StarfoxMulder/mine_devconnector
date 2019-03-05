@@ -21,6 +21,8 @@ router.post("/experience",
       return res.status(400).json(errors);
     }
     **** rest of code for route if webtoken is valid for the user on this endpoint ****
+  }
+);
  ```
     
 

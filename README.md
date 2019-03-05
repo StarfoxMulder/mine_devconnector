@@ -8,7 +8,7 @@ Social network for developers.  Build a profile with
 
 Involves the creation of a custom API with token validaton for encrypted endpoints.
 
-*example: 
+*example:*
 ```
 router.post("/experience", 
   passport.authenticate("jwt", {session: false}),

@@ -9,4 +9,8 @@ Social network for developers.  Build a profile with
 [DevsConnect](http://www.devsconnect.com/) was built using
 * HTML/CSS
 * JavaScript (ES6)
-* React 
+* React
+* React Router
+* Node.js
+* Express
+* Axios

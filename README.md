@@ -1,7 +1,7 @@
 # DevsConnect
 http://www.devsconnect.com
 
-Social network for developers.  Build a profile with
+Social network for developers.  Create, edit, or delete a profile with
 * a bio
 * your skills
 * a feed of your most recent GitHub repositories
